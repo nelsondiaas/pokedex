@@ -1,7 +1,16 @@
+import 'package:pokedex/stores/poke.api.store.dart';
 import 'package:pokedex/views/home/home.view.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
-void main() => runApp(new MyApp()); 
+void main() { 
+
+  /* Config singleton, provider instances */
+  GetIt provider = GetIt.instance;
+  provider.registerSingleton<PokeApiStore>(PokeApiStore());
+  
+  return runApp(MyApp()); 
+} 
 
 class MyApp extends StatelessWidget {
   @override
