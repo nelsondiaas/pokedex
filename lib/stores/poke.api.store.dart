@@ -1,9 +1,9 @@
-import 'dart:convert';
-import 'package:pokedex/consts/consts.api.dart';
+import 'package:pokedex/controller/poke.api.controller.dart';
 import 'package:pokedex/models/pokedex.model.dart';
-import 'package:http/http.dart' as http;
+import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
 part 'poke.api.store.g.dart';
+
 
 class PokeApiStore = _PokeApiStoreBase with _$PokeApiStore;
 
@@ -14,21 +14,10 @@ abstract class _PokeApiStoreBase with Store {
 
   @action
   fetchPokemonList() {
-    pokedexModel = null;
-    loadPokeApi().then((pokeList) {
+    PokeApiController pokeApiController = GetIt.instance<PokeApiController>();
+    pokeApiController.openPokedex().then((pokeList) {
       pokedexModel = pokeList;
     });
-  }
-
-  Future<PokedexModel> loadPokeApi() async {
-    try {
-      final res = await http.get(ConstsApi.pokeApiUri);
-      var decodeJson = jsonDecode(res.body);
-      return PokedexModel.fromJson(decodeJson);
-    } catch (err) {
-      print("Error when loading the list");
-      return null;
-    }
   }
 }
 
