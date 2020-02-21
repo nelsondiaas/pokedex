@@ -1,15 +1,15 @@
-import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:pokedex/views/home/widgets/app.bar.home.widget.dart';
 import 'package:pokedex/stores/poke.api.store.dart';
-import 'package:pokedex/views/home/widgets/AppBarHome.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter/material.dart';
 
 
-class Home extends StatefulWidget {
+class HomeView extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _HomeViewState createState() => _HomeViewState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeViewState extends State<HomeView> {
 
   PokeApiStore _pokeApiStore;
   
@@ -51,7 +51,7 @@ class _HomeState extends State<Home> {
                 Container(
                   height: _statusWidth,
                 ),
-                AppBarHome(),
+                AppBarHomeWidget(),
                 Expanded(
                   child: Container(
                     child: Observer(
