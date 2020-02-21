@@ -1,5 +1,5 @@
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:pokedex/stores/pokeapi_store.dart';
+import 'package:pokedex/stores/poke.api.store.dart';
 import 'package:pokedex/views/home/widgets/AppBarHome.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +17,7 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     _pokeApiStore = new PokeApiStore();
-    if (_pokeApiStore.pokeApi == null) {
+    if (_pokeApiStore.pokedexModel == null) {
       _pokeApiStore.fetchPokemonList();
     }
   }
@@ -57,12 +57,12 @@ class _HomeState extends State<Home> {
                     child: Observer(
                       name: 'ListHomeLayout',
                       builder: (BuildContext context) {
-                        return (_pokeApiStore.pokeApi != null) ?
+                        return (_pokeApiStore.pokedexModel != null) ?
                         ListView.builder(
-                          itemCount: _pokeApiStore.pokeApi.pokemon.length,
+                          itemCount: _pokeApiStore.pokedexModel.pokemon.length,
                           itemBuilder: (context, index) {
                           return ListTile(
-                              title: Text(_pokeApiStore.pokeApi.pokemon[index].name),
+                              title: Text(_pokeApiStore.pokedexModel.pokemon[index].name),
                             );
                           },
                         ): Center(child: CircularProgressIndicator());

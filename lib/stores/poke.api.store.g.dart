@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'pokeapi_store.dart';
+part of 'poke.api.store.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -9,21 +9,21 @@ part of 'pokeapi_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$PokeApiStore on _PokeApiStoreBase, Store {
-  final _$pokeApiAtom = Atom(name: '_PokeApiStoreBase.pokeApi');
+  final _$pokedexModelAtom = Atom(name: '_PokeApiStoreBase.pokedexModel');
 
   @override
-  PokeApi get pokeApi {
-    _$pokeApiAtom.context.enforceReadPolicy(_$pokeApiAtom);
-    _$pokeApiAtom.reportObserved();
-    return super.pokeApi;
+  PokedexModel get pokedexModel {
+    _$pokedexModelAtom.context.enforceReadPolicy(_$pokedexModelAtom);
+    _$pokedexModelAtom.reportObserved();
+    return super.pokedexModel;
   }
 
   @override
-  set pokeApi(PokeApi value) {
-    _$pokeApiAtom.context.conditionallyRunInAction(() {
-      super.pokeApi = value;
-      _$pokeApiAtom.reportChanged();
-    }, _$pokeApiAtom, name: '${_$pokeApiAtom.name}_set');
+  set pokedexModel(PokedexModel value) {
+    _$pokedexModelAtom.context.conditionallyRunInAction(() {
+      super.pokedexModel = value;
+      _$pokedexModelAtom.reportChanged();
+    }, _$pokedexModelAtom, name: '${_$pokedexModelAtom.name}_set');
   }
 
   final _$_PokeApiStoreBaseActionController =
@@ -41,7 +41,7 @@ mixin _$PokeApiStore on _PokeApiStoreBase, Store {
 
   @override
   String toString() {
-    final string = 'pokeApi: ${pokeApi.toString()}';
+    final string = 'pokedexModel: ${pokedexModel.toString()}';
     return '{$string}';
   }
 }
