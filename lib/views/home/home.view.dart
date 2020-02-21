@@ -2,6 +2,7 @@ import 'package:pokedex/views/home/widgets/app.bar.home.widget.dart';
 import 'package:pokedex/stores/poke.api.store.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 
 class HomeView extends StatefulWidget {
@@ -10,13 +11,13 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-
+  
   PokeApiStore _pokeApiStore;
   
   @override
   void initState() {
     super.initState();
-    _pokeApiStore = new PokeApiStore();
+    _pokeApiStore = GetIt.instance<PokeApiStore>();
     if (_pokeApiStore.pokedexModel == null) {
       _pokeApiStore.fetchPokemonList();
     }
@@ -24,7 +25,7 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-
+    
     double _layoutWidth = MediaQuery.of(context).size.width;
     double _statusWidth = MediaQuery.of(context).padding.top;
 
