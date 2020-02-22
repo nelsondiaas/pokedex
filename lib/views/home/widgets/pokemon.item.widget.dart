@@ -44,12 +44,14 @@ class PokemonItemWidget extends StatelessWidget {
               ),
               Align(
                 alignment: Alignment.bottomRight,
-                child: Opacity(
-                  child: Image.asset('assets/images/pokeball_white.png',
-                    height: 80,
-                    width: 80,
-                  ),
-                  opacity: 0.2,
+                child: Hero(
+                    child: Opacity(
+                    child: Image.asset('assets/images/pokeball_white.png',
+                      height: 80,
+                      width: 80,
+                    ),
+                    opacity: 0.2,
+                  ), tag: index.toString(),
                 ),
               ),
               Align(
