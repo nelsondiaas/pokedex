@@ -1,3 +1,6 @@
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:pokedex/models/pokemon.model.dart';
+import 'package:pokedex/views/home/widgets/pokemon.item.widget.dart';
 import 'package:pokedex/views/home/widgets/app.bar.home.widget.dart';
 import 'package:pokedex/stores/poke.api.store.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -59,13 +62,47 @@ class _HomeViewState extends State<HomeView> {
                       name: 'ListHomeLayout',
                       builder: (BuildContext context) {
                         return (_pokeApiStore.pokedexModel != null) ?
-                        ListView.builder(
-                          itemCount: _pokeApiStore.pokedexModel.pokemon.length,
-                          itemBuilder: (context, index) {
-                          return ListTile(
-                              title: Text(_pokeApiStore.pokedexModel.pokemon[index].name),
-                            );
-                          },
+                        AnimationLimiter(
+                          child: GridView.builder(
+                            physics: BouncingScrollPhysics(),
+                            padding: EdgeInsets.all(12),
+                            addAutomaticKeepAlives: true,
+                            gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                            itemCount: _pokeApiStore.pokedexModel.pokemon.length,
+                            itemBuilder: (context, index) {
+                              PokemonModel pokemon = _pokeApiStore.getPokemon(index: index);
+                              return AnimationConfiguration.staggeredGrid(
+                                position: index,
+                                duration: Duration(milliseconds: 375),
+                                columnCount: 2,
+                                child: ScaleAnimation(
+                                  child: GestureDetector(
+                                    child: PokemonItemWidget(
+                                      types: pokemon.type,
+                                      name: pokemon.name,
+                                      index: index,
+                                      image: _pokeApiStore.getImagePokemon(number: pokemon.num),
+                                    ),
+                                  
+                                    /*
+                                    onTap: () {
+                                      //_pokemonStore.setPokemonAtual(index: index);
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder:
+                                                (BuildContext context) => PokeDetailPage(
+                                              index: index,
+                                            ),
+                                            fullscreenDialog: true,
+                                          ));
+                                    },
+                                    */
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
                         ): Center(child: CircularProgressIndicator());
                       },
                     ),
