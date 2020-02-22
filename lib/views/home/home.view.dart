@@ -6,6 +6,7 @@ import 'package:pokedex/stores/poke.api.store.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:pokedex/views/pokemon-detail/pokemon.detail.view.dart';
 
 
 class HomeView extends StatefulWidget {
@@ -81,23 +82,21 @@ class _HomeViewState extends State<HomeView> {
                                       types: pokemon.type,
                                       name: pokemon.name,
                                       index: index,
-                                      image: _pokeApiStore.getImagePokemon(number: pokemon.num),
+                                      image: _pokeApiStore.getImagePokemon(number: pokemon.num, width: 80, height: 80),
                                     ),
-                                  
-                                    /*
                                     onTap: () {
-                                      //_pokemonStore.setPokemonAtual(index: index);
+                                      /* current pokemon */
+                                      _pokeApiStore.setCurrentPokemon(index: index);
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder:
-                                                (BuildContext context) => PokeDetailPage(
+                                            builder: (BuildContext context) => PokemonDetailView(
                                               index: index,
                                             ),
                                             fullscreenDialog: true,
-                                          ));
+                                        )
+                                      );
                                     },
-                                    */
                                   ),
                                 ),
                               );
