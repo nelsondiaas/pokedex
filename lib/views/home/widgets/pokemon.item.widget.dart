@@ -38,7 +38,7 @@ class PokemonItemWidget extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: setTipos(),
+                    child: setTypes(),
                   ),
                 ],
               ),
@@ -69,7 +69,7 @@ class PokemonItemWidget extends StatelessWidget {
     );
   }
 
-  Widget setTipos() {
+  Widget setTypes() {
     List<Widget> lista = [];
     types.forEach((nome) {
       lista.add(

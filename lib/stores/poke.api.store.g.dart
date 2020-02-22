@@ -15,6 +15,18 @@ mixin _$PokeApiStore on _PokeApiStoreBase, Store {
   PokedexModel get pokedexModel => (_$pokedexModelComputed ??=
           Computed<PokedexModel>(() => super.pokedexModel))
       .value;
+  Computed<PokemonModel> _$currentPokemonComputed;
+
+  @override
+  PokemonModel get currentPokemon => (_$currentPokemonComputed ??=
+          Computed<PokemonModel>(() => super.currentPokemon))
+      .value;
+  Computed<dynamic> _$currentColorPokemonComputed;
+
+  @override
+  dynamic get currentColorPokemon => (_$currentColorPokemonComputed ??=
+          Computed<dynamic>(() => super.currentColorPokemon))
+      .value;
 
   final _$_pokedexModelAtom = Atom(name: '_PokeApiStoreBase._pokedexModel');
 
@@ -31,6 +43,43 @@ mixin _$PokeApiStore on _PokeApiStoreBase, Store {
       super._pokedexModel = value;
       _$_pokedexModelAtom.reportChanged();
     }, _$_pokedexModelAtom, name: '${_$_pokedexModelAtom.name}_set');
+  }
+
+  final _$_currentPokemonAtom = Atom(name: '_PokeApiStoreBase._currentPokemon');
+
+  @override
+  PokemonModel get _currentPokemon {
+    _$_currentPokemonAtom.context.enforceReadPolicy(_$_currentPokemonAtom);
+    _$_currentPokemonAtom.reportObserved();
+    return super._currentPokemon;
+  }
+
+  @override
+  set _currentPokemon(PokemonModel value) {
+    _$_currentPokemonAtom.context.conditionallyRunInAction(() {
+      super._currentPokemon = value;
+      _$_currentPokemonAtom.reportChanged();
+    }, _$_currentPokemonAtom, name: '${_$_currentPokemonAtom.name}_set');
+  }
+
+  final _$_currentColorPokemonAtom =
+      Atom(name: '_PokeApiStoreBase._currentColorPokemon');
+
+  @override
+  dynamic get _currentColorPokemon {
+    _$_currentColorPokemonAtom.context
+        .enforceReadPolicy(_$_currentColorPokemonAtom);
+    _$_currentColorPokemonAtom.reportObserved();
+    return super._currentColorPokemon;
+  }
+
+  @override
+  set _currentColorPokemon(dynamic value) {
+    _$_currentColorPokemonAtom.context.conditionallyRunInAction(() {
+      super._currentColorPokemon = value;
+      _$_currentColorPokemonAtom.reportChanged();
+    }, _$_currentColorPokemonAtom,
+        name: '${_$_currentColorPokemonAtom.name}_set');
   }
 
   final _$_PokeApiStoreBaseActionController =
@@ -57,10 +106,21 @@ mixin _$PokeApiStore on _PokeApiStoreBase, Store {
   }
 
   @override
-  dynamic getImagePokemon({String number}) {
+  dynamic setCurrentPokemon({int index}) {
     final _$actionInfo = _$_PokeApiStoreBaseActionController.startAction();
     try {
-      return super.getImagePokemon(number: number);
+      return super.setCurrentPokemon(index: index);
+    } finally {
+      _$_PokeApiStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic getImagePokemon({String number, double width, double height}) {
+    final _$actionInfo = _$_PokeApiStoreBaseActionController.startAction();
+    try {
+      return super
+          .getImagePokemon(number: number, width: width, height: height);
     } finally {
       _$_PokeApiStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -68,7 +128,8 @@ mixin _$PokeApiStore on _PokeApiStoreBase, Store {
 
   @override
   String toString() {
-    final string = 'pokedexModel: ${pokedexModel.toString()}';
+    final string =
+        'pokedexModel: ${pokedexModel.toString()},currentPokemon: ${currentPokemon.toString()},currentColorPokemon: ${currentColorPokemon.toString()}';
     return '{$string}';
   }
 }

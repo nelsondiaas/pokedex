@@ -14,10 +14,10 @@ class PokedexRepository {
     return PokedexModel.fromJson(decodeJson);
   }
 
-   Widget getImage({String number}) {
+   Widget getImage({String number, double width, double height}) {
     return CachedNetworkImage(
-      width: 80,
-      height: 80,
+      width: width,
+      height: height,
       placeholder: (context, url) => new Container(
         color: Colors.transparent,
       ),
