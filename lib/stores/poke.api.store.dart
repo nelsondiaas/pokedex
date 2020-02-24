@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:pokedex/consts/consts.api.dart';
 import 'package:pokedex/controller/poke.api.controller.dart';
 import 'package:pokedex/models/pokedex.model.dart';
@@ -25,6 +26,18 @@ abstract class _PokeApiStoreBase with Store {
   @observable
   int _currentPosition;
 
+  @observable
+  double _opacitytitleAppBar = 0;
+
+  @observable
+  double _progress = 0;
+
+  @observable
+  double _multipli = 1;
+
+  @observable
+  double _opacity = 1;
+
   @computed
   PokedexModel get pokedexModel => _pokedexModel;
 
@@ -33,6 +46,12 @@ abstract class _PokeApiStoreBase with Store {
 
   @computed
   dynamic get currentColorPokemon => _currentColorPokemon;
+
+  @computed
+  double get opacitytitleAppBar => _opacitytitleAppBar;
+
+  @computed
+  double get opacity => _opacity;
 
   @computed
   int get currentPosition => _currentPosition;
@@ -52,17 +71,25 @@ abstract class _PokeApiStoreBase with Store {
   }
   
   @action
-  setCurrentPokemon({int index}) {
+  void setCurrentPokemon({int index}) {
     _currentPokemon = _pokedexModel.pokemon[index];
     _currentColorPokemon = ConstsApi.getColorType(type: _currentPokemon.type[0]);
     _currentPosition = index;
   }
 
   @action
-  getImagePokemon({String number, double width, double height, dynamic alignment}) {
+  Widget getImagePokemon({String number, double width, double height, dynamic alignment}) {
     _pokeApiController = GetIt.instance<PokeApiController>();
     return _pokeApiController.getImagePokemon(
       number: number, width: width, height: height, alignment: alignment);
+  }
+
+  @action
+  void setSlidingState(progress) {
+    _progress = progress;
+    _multipli = 1 - ConstsApi.interval(lower: 0.0, upper: 0.7, progress: _progress);
+    _opacity = _multipli;
+    _opacitytitleAppBar = _multipli = ConstsApi.interval(lower: 0.55, upper: 0.8, progress: _progress);
   }
 }
 

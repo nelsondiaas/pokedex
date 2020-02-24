@@ -27,6 +27,17 @@ mixin _$PokeApiStore on _PokeApiStoreBase, Store {
   dynamic get currentColorPokemon => (_$currentColorPokemonComputed ??=
           Computed<dynamic>(() => super.currentColorPokemon))
       .value;
+  Computed<double> _$opacitytitleAppBarComputed;
+
+  @override
+  double get opacitytitleAppBar => (_$opacitytitleAppBarComputed ??=
+          Computed<double>(() => super.opacitytitleAppBar))
+      .value;
+  Computed<double> _$opacityComputed;
+
+  @override
+  double get opacity =>
+      (_$opacityComputed ??= Computed<double>(() => super.opacity)).value;
   Computed<int> _$currentPositionComputed;
 
   @override
@@ -106,6 +117,77 @@ mixin _$PokeApiStore on _PokeApiStoreBase, Store {
     }, _$_currentPositionAtom, name: '${_$_currentPositionAtom.name}_set');
   }
 
+  final _$_opacitytitleAppBarAtom =
+      Atom(name: '_PokeApiStoreBase._opacitytitleAppBar');
+
+  @override
+  double get _opacitytitleAppBar {
+    _$_opacitytitleAppBarAtom.context
+        .enforceReadPolicy(_$_opacitytitleAppBarAtom);
+    _$_opacitytitleAppBarAtom.reportObserved();
+    return super._opacitytitleAppBar;
+  }
+
+  @override
+  set _opacitytitleAppBar(double value) {
+    _$_opacitytitleAppBarAtom.context.conditionallyRunInAction(() {
+      super._opacitytitleAppBar = value;
+      _$_opacitytitleAppBarAtom.reportChanged();
+    }, _$_opacitytitleAppBarAtom,
+        name: '${_$_opacitytitleAppBarAtom.name}_set');
+  }
+
+  final _$_progressAtom = Atom(name: '_PokeApiStoreBase._progress');
+
+  @override
+  double get _progress {
+    _$_progressAtom.context.enforceReadPolicy(_$_progressAtom);
+    _$_progressAtom.reportObserved();
+    return super._progress;
+  }
+
+  @override
+  set _progress(double value) {
+    _$_progressAtom.context.conditionallyRunInAction(() {
+      super._progress = value;
+      _$_progressAtom.reportChanged();
+    }, _$_progressAtom, name: '${_$_progressAtom.name}_set');
+  }
+
+  final _$_multipliAtom = Atom(name: '_PokeApiStoreBase._multipli');
+
+  @override
+  double get _multipli {
+    _$_multipliAtom.context.enforceReadPolicy(_$_multipliAtom);
+    _$_multipliAtom.reportObserved();
+    return super._multipli;
+  }
+
+  @override
+  set _multipli(double value) {
+    _$_multipliAtom.context.conditionallyRunInAction(() {
+      super._multipli = value;
+      _$_multipliAtom.reportChanged();
+    }, _$_multipliAtom, name: '${_$_multipliAtom.name}_set');
+  }
+
+  final _$_opacityAtom = Atom(name: '_PokeApiStoreBase._opacity');
+
+  @override
+  double get _opacity {
+    _$_opacityAtom.context.enforceReadPolicy(_$_opacityAtom);
+    _$_opacityAtom.reportObserved();
+    return super._opacity;
+  }
+
+  @override
+  set _opacity(double value) {
+    _$_opacityAtom.context.conditionallyRunInAction(() {
+      super._opacity = value;
+      _$_opacityAtom.reportChanged();
+    }, _$_opacityAtom, name: '${_$_opacityAtom.name}_set');
+  }
+
   final _$_PokeApiStoreBaseActionController =
       ActionController(name: '_PokeApiStoreBase');
 
@@ -130,7 +212,7 @@ mixin _$PokeApiStore on _PokeApiStoreBase, Store {
   }
 
   @override
-  dynamic setCurrentPokemon({int index}) {
+  void setCurrentPokemon({int index}) {
     final _$actionInfo = _$_PokeApiStoreBaseActionController.startAction();
     try {
       return super.setCurrentPokemon(index: index);
@@ -140,7 +222,7 @@ mixin _$PokeApiStore on _PokeApiStoreBase, Store {
   }
 
   @override
-  dynamic getImagePokemon(
+  Widget getImagePokemon(
       {String number, double width, double height, dynamic alignment}) {
     final _$actionInfo = _$_PokeApiStoreBaseActionController.startAction();
     try {
@@ -152,9 +234,19 @@ mixin _$PokeApiStore on _PokeApiStoreBase, Store {
   }
 
   @override
+  void setSlidingState(dynamic progress) {
+    final _$actionInfo = _$_PokeApiStoreBaseActionController.startAction();
+    try {
+      return super.setSlidingState(progress);
+    } finally {
+      _$_PokeApiStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     final string =
-        'pokedexModel: ${pokedexModel.toString()},currentPokemon: ${currentPokemon.toString()},currentColorPokemon: ${currentColorPokemon.toString()},currentPosition: ${currentPosition.toString()}';
+        'pokedexModel: ${pokedexModel.toString()},currentPokemon: ${currentPokemon.toString()},currentColorPokemon: ${currentColorPokemon.toString()},opacitytitleAppBar: ${opacitytitleAppBar.toString()},opacity: ${opacity.toString()},currentPosition: ${currentPosition.toString()}';
     return '{$string}';
   }
 }
