@@ -20,9 +20,9 @@ class PokeApiController {
     }
   }
 
-  Widget getImagePokemon({String number, double width, double height}) {
+  Widget getImagePokemon({String number, double width, double height, dynamic alignment}) {
     try {
-      return _pokedexRepository.getImage(number: number, width: width, height: height);
+      return _pokedexRepository.getImage(number: number, width: width, height: height, alignment: alignment);
     } catch (error, stacktrace) {
        print("Error when loading the image" + stacktrace.toString());
        return null;

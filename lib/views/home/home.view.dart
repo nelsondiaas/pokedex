@@ -82,7 +82,7 @@ class _HomeViewState extends State<HomeView> {
                                       types: pokemon.type,
                                       name: pokemon.name,
                                       index: index,
-                                      image: _pokeApiStore.getImagePokemon(number: pokemon.num, width: 80, height: 80),
+                                      num: pokemon.num,
                                     ),
                                     onTap: () {
                                       /* current pokemon */

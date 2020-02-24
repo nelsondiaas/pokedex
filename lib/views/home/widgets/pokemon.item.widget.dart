@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:pokedex/consts/consts.api.dart';
+import 'package:pokedex/stores/poke.api.store.dart';
 
 
 class PokemonItemWidget extends StatelessWidget {
 
+  PokeApiStore _pokeApiStore = GetIt.instance<PokeApiStore>();
   final String name;
   final int index;
   final String color;
-  final Widget image;
+  final String num;
   final List<String> types;
 
-  PokemonItemWidget({Key key, this.name, this.index, this.color, this.image, this.types}) : super(key: key);
+  PokemonItemWidget({Key key, this.name, this.index, this.color, this.num, this.types}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +23,6 @@ class PokemonItemWidget extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Stack(
-            //alignment: Alignment.bottomRight,
             children: <Widget>[
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,7 +58,8 @@ class PokemonItemWidget extends StatelessWidget {
               ),
               Align(
                 alignment: Alignment.bottomRight,
-                child: image
+                child: _pokeApiStore.getImagePokemon(
+                number: num, width: 80, height: 80, alignment: Alignment.bottomRight),
               ),
             ],
           ),

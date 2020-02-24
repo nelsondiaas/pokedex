@@ -13,9 +13,10 @@ class PokedexRepository {
     var decodeJson = jsonDecode(res.body);
     return PokedexModel.fromJson(decodeJson);
   }
-
-   Widget getImage({String number, double width, double height}) {
+  
+   Widget getImage({String number, double width, double height, dynamic alignment}) {
     return CachedNetworkImage(
+      alignment: alignment,
       width: width,
       height: height,
       placeholder: (context, url) => new Container(

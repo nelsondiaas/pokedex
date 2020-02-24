@@ -27,6 +27,12 @@ mixin _$PokeApiStore on _PokeApiStoreBase, Store {
   dynamic get currentColorPokemon => (_$currentColorPokemonComputed ??=
           Computed<dynamic>(() => super.currentColorPokemon))
       .value;
+  Computed<int> _$currentPositionComputed;
+
+  @override
+  int get currentPosition =>
+      (_$currentPositionComputed ??= Computed<int>(() => super.currentPosition))
+          .value;
 
   final _$_pokedexModelAtom = Atom(name: '_PokeApiStoreBase._pokedexModel');
 
@@ -82,6 +88,24 @@ mixin _$PokeApiStore on _PokeApiStoreBase, Store {
         name: '${_$_currentColorPokemonAtom.name}_set');
   }
 
+  final _$_currentPositionAtom =
+      Atom(name: '_PokeApiStoreBase._currentPosition');
+
+  @override
+  int get _currentPosition {
+    _$_currentPositionAtom.context.enforceReadPolicy(_$_currentPositionAtom);
+    _$_currentPositionAtom.reportObserved();
+    return super._currentPosition;
+  }
+
+  @override
+  set _currentPosition(int value) {
+    _$_currentPositionAtom.context.conditionallyRunInAction(() {
+      super._currentPosition = value;
+      _$_currentPositionAtom.reportChanged();
+    }, _$_currentPositionAtom, name: '${_$_currentPositionAtom.name}_set');
+  }
+
   final _$_PokeApiStoreBaseActionController =
       ActionController(name: '_PokeApiStoreBase');
 
@@ -96,7 +120,7 @@ mixin _$PokeApiStore on _PokeApiStoreBase, Store {
   }
 
   @override
-  dynamic getPokemon({int index}) {
+  PokemonModel getPokemon({int index}) {
     final _$actionInfo = _$_PokeApiStoreBaseActionController.startAction();
     try {
       return super.getPokemon(index: index);
@@ -116,11 +140,12 @@ mixin _$PokeApiStore on _PokeApiStoreBase, Store {
   }
 
   @override
-  dynamic getImagePokemon({String number, double width, double height}) {
+  dynamic getImagePokemon(
+      {String number, double width, double height, dynamic alignment}) {
     final _$actionInfo = _$_PokeApiStoreBaseActionController.startAction();
     try {
-      return super
-          .getImagePokemon(number: number, width: width, height: height);
+      return super.getImagePokemon(
+          number: number, width: width, height: height, alignment: alignment);
     } finally {
       _$_PokeApiStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -129,7 +154,7 @@ mixin _$PokeApiStore on _PokeApiStoreBase, Store {
   @override
   String toString() {
     final string =
-        'pokedexModel: ${pokedexModel.toString()},currentPokemon: ${currentPokemon.toString()},currentColorPokemon: ${currentColorPokemon.toString()}';
+        'pokedexModel: ${pokedexModel.toString()},currentPokemon: ${currentPokemon.toString()},currentColorPokemon: ${currentColorPokemon.toString()},currentPosition: ${currentPosition.toString()}';
     return '{$string}';
   }
 }
