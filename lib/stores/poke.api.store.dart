@@ -22,6 +22,9 @@ abstract class _PokeApiStoreBase with Store {
   @observable
   dynamic _currentColorPokemon;
 
+  @observable
+  int _currentPosition;
+
   @computed
   PokedexModel get pokedexModel => _pokedexModel;
 
@@ -30,6 +33,9 @@ abstract class _PokeApiStoreBase with Store {
 
   @computed
   dynamic get currentColorPokemon => _currentColorPokemon;
+
+  @computed
+  int get currentPosition => _currentPosition;
 
   @action
   fetchPokemonList() {
@@ -41,7 +47,7 @@ abstract class _PokeApiStoreBase with Store {
   }
 
   @action
-  getPokemon({int index}) {
+  PokemonModel getPokemon({int index}) {
     return _pokedexModel.pokemon[index];
   }
   
@@ -49,12 +55,14 @@ abstract class _PokeApiStoreBase with Store {
   setCurrentPokemon({int index}) {
     _currentPokemon = _pokedexModel.pokemon[index];
     _currentColorPokemon = ConstsApi.getColorType(type: _currentPokemon.type[0]);
+    _currentPosition = index;
   }
 
   @action
-  getImagePokemon({String number, double width, double height}) {
+  getImagePokemon({String number, double width, double height, dynamic alignment}) {
     _pokeApiController = GetIt.instance<PokeApiController>();
-    return _pokeApiController.getImagePokemon(number: number, width: width, height: height);
+    return _pokeApiController.getImagePokemon(
+      number: number, width: width, height: height, alignment: alignment);
   }
 }
 
