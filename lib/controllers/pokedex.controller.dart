@@ -1,18 +1,21 @@
-import 'package:flutter/cupertino.dart';
-import 'package:pokedex/consts/consts.api.dart';
-import 'package:pokedex/controller/poke.api.controller.dart';
+import 'package:pokedex/repositories/pokedex.repository.dart';
 import 'package:pokedex/models/pokedex.model.dart';
-import 'package:get_it/get_it.dart';
-import 'package:mobx/mobx.dart';
 import 'package:pokedex/models/pokemon.model.dart';
-part 'poke.api.store.g.dart';
+import 'package:pokedex/utils/consts.api.dart';
+import 'package:flutter/material.dart';
+import 'package:mobx/mobx.dart';
+part 'pokedex.controller.g.dart';
 
 
-class PokeApiStore = _PokeApiStoreBase with _$PokeApiStore;
+class PokedexController = _PokedexControllerBase with _$PokedexController;
 
-abstract class _PokeApiStoreBase with Store {
+abstract class _PokedexControllerBase with Store {
 
-  PokeApiController _pokeApiController;
+  PokedexRepository _pokedexRepository;
+
+  _PokedexControllerBase() {
+    _pokedexRepository = new PokedexRepository();
+  }
 
   @observable
   PokedexModel _pokedexModel;
@@ -57,10 +60,9 @@ abstract class _PokeApiStoreBase with Store {
   int get currentPosition => _currentPosition;
 
   @action
-  fetchPokemonList() {
+  void fetchPokemonList() {
     _pokedexModel = null;
-    _pokeApiController = GetIt.instance<PokeApiController>();
-    _pokeApiController.openPokedex().then((pokeList) {
+    _pokedexRepository.getAll().then((pokeList) {
       _pokedexModel = pokeList;
     });
   }
@@ -79,8 +81,7 @@ abstract class _PokeApiStoreBase with Store {
 
   @action
   Widget getImagePokemon({String number, double width, double height, dynamic alignment}) {
-    _pokeApiController = GetIt.instance<PokeApiController>();
-    return _pokeApiController.getImagePokemon(
+    return _pokedexRepository.getImage(
       number: number, width: width, height: height, alignment: alignment);
   }
 
@@ -91,6 +92,7 @@ abstract class _PokeApiStoreBase with Store {
     _opacity = _multipli;
     _opacitytitleAppBar = _multipli = ConstsApi.interval(lower: 0.55, upper: 0.8, progress: _progress);
   }
+
 }
 
 /*

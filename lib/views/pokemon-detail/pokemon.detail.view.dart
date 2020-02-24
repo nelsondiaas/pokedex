@@ -1,6 +1,6 @@
-import 'package:pokedex/models/pokemon.model.dart';
+import 'package:pokedex/controllers/pokedex.controller.dart';
 import 'package:simple_animations/simple_animations.dart';
-import 'package:pokedex/stores/poke.api.store.dart';
+import 'package:pokedex/models/pokemon.model.dart';
 import 'package:sliding_sheet/sliding_sheet.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter/material.dart';
@@ -18,15 +18,16 @@ class PokemonDetailView extends StatefulWidget {
 }
 
 class _PokemonDetailViewState extends State<PokemonDetailView> {
+
+  PokedexController _pokedexController;
   PageController _pageController;
-  PokeApiStore _pokeApiStore;
   MultiTrackTween _animation;
   
   @override
   void initState() {
     super.initState();
     _pageController = PageController(initialPage: widget.index);
-    _pokeApiStore = GetIt.instance<PokeApiStore>();
+    _pokedexController = GetIt.instance<PokedexController>();
     _animation = rotation();
   }
 
@@ -41,16 +42,16 @@ class _PokemonDetailViewState extends State<PokemonDetailView> {
             return AppBar(
               title: Opacity(
                 child: Text(
-                  _pokeApiStore.currentPokemon.name,
+                  _pokedexController.currentPokemon.name,
                   style: TextStyle(
                       fontFamily: 'Google',
                       fontWeight: FontWeight.bold,
                       fontSize: 21),
                 ),
-                opacity: _pokeApiStore.opacitytitleAppBar,
+                opacity: _pokedexController.opacitytitleAppBar,
               ),
               elevation: 0,
-              backgroundColor: _pokeApiStore.currentColorPokemon,
+              backgroundColor: _pokedexController.currentColorPokemon,
               leading: IconButton(
                 icon: Icon(Icons.arrow_back),
                 onPressed: () {
@@ -71,14 +72,14 @@ class _PokemonDetailViewState extends State<PokemonDetailView> {
         children: <Widget>[
           Observer(
             builder: (context) {
-              return Container(color: _pokeApiStore.currentColorPokemon);
+              return Container(color: _pokedexController.currentColorPokemon);
             },
           ),
           Container(height: MediaQuery.of(context).size.height / 3),
           Observer(builder: (context) {
             return SlidingSheet(
               listener: (state) {
-                _pokeApiStore.setSlidingState(state.progress);
+                _pokedexController.setSlidingState(state.progress);
               },
               elevation: 0,
               cornerRadius: 30,
@@ -96,18 +97,18 @@ class _PokemonDetailViewState extends State<PokemonDetailView> {
           }),
           Observer(builder: (context) {
             return Opacity(
-              opacity: _pokeApiStore.opacity,
+              opacity: _pokedexController.opacity,
               child: Padding(
                 child: SizedBox(
                   height: 200,
                   child: PageView.builder(
                     controller: _pageController,
                     onPageChanged: (index) {
-                      _pokeApiStore.setCurrentPokemon(index: index);
+                      _pokedexController.setCurrentPokemon(index: index);
                     },
-                    itemCount: _pokeApiStore.pokedexModel.pokemon.length,
+                    itemCount: _pokedexController.pokedexModel.pokemon.length,
                     itemBuilder: (BuildContext context, int _index) {
-                      PokemonModel _pokemonItem = _pokeApiStore.getPokemon(index: _index);
+                      PokemonModel _pokemonItem = _pokedexController.getPokemon(index: _index);
                       return Stack(
                         alignment: Alignment.center,
                         children: <Widget>[
@@ -132,20 +133,20 @@ class _PokemonDetailViewState extends State<PokemonDetailView> {
                             }),
                             Observer(builder: (BuildContext context) {
                               return AnimatedPadding(
-                                child:  _pokeApiStore.getImagePokemon(
+                                child: _pokedexController.getImagePokemon(
                                   number: _pokemonItem.num, 
                                   width: 160, height: 160, 
                                   alignment: Alignment.center
                                 ),
                                 curve: Curves.bounceInOut,
                                 duration: Duration(milliseconds: 400), 
-                                padding: EdgeInsets.all(_index == _pokeApiStore.currentPosition ? 0 : 60));
+                                padding: EdgeInsets.all(_index == _pokedexController.currentPosition ? 0 : 60));
                             }),
                         ]
                       );
                     },
                   )),
-                padding: EdgeInsets.only(top: _pokeApiStore.opacitytitleAppBar == 1 ? 1000: 60 - _pokeApiStore.opacity * 50),
+                padding: EdgeInsets.only(top: _pokedexController.opacitytitleAppBar == 1 ? 1000: 60 - _pokedexController.opacity * 50),
               ),
             );
           })

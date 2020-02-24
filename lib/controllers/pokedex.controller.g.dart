@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'poke.api.store.dart';
+part of 'pokedex.controller.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,7 +8,7 @@ part of 'poke.api.store.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$PokeApiStore on _PokeApiStoreBase, Store {
+mixin _$PokedexController on _PokedexControllerBase, Store {
   Computed<PokedexModel> _$pokedexModelComputed;
 
   @override
@@ -45,7 +45,8 @@ mixin _$PokeApiStore on _PokeApiStoreBase, Store {
       (_$currentPositionComputed ??= Computed<int>(() => super.currentPosition))
           .value;
 
-  final _$_pokedexModelAtom = Atom(name: '_PokeApiStoreBase._pokedexModel');
+  final _$_pokedexModelAtom =
+      Atom(name: '_PokedexControllerBase._pokedexModel');
 
   @override
   PokedexModel get _pokedexModel {
@@ -62,7 +63,8 @@ mixin _$PokeApiStore on _PokeApiStoreBase, Store {
     }, _$_pokedexModelAtom, name: '${_$_pokedexModelAtom.name}_set');
   }
 
-  final _$_currentPokemonAtom = Atom(name: '_PokeApiStoreBase._currentPokemon');
+  final _$_currentPokemonAtom =
+      Atom(name: '_PokedexControllerBase._currentPokemon');
 
   @override
   PokemonModel get _currentPokemon {
@@ -80,7 +82,7 @@ mixin _$PokeApiStore on _PokeApiStoreBase, Store {
   }
 
   final _$_currentColorPokemonAtom =
-      Atom(name: '_PokeApiStoreBase._currentColorPokemon');
+      Atom(name: '_PokedexControllerBase._currentColorPokemon');
 
   @override
   dynamic get _currentColorPokemon {
@@ -100,7 +102,7 @@ mixin _$PokeApiStore on _PokeApiStoreBase, Store {
   }
 
   final _$_currentPositionAtom =
-      Atom(name: '_PokeApiStoreBase._currentPosition');
+      Atom(name: '_PokedexControllerBase._currentPosition');
 
   @override
   int get _currentPosition {
@@ -118,7 +120,7 @@ mixin _$PokeApiStore on _PokeApiStoreBase, Store {
   }
 
   final _$_opacitytitleAppBarAtom =
-      Atom(name: '_PokeApiStoreBase._opacitytitleAppBar');
+      Atom(name: '_PokedexControllerBase._opacitytitleAppBar');
 
   @override
   double get _opacitytitleAppBar {
@@ -137,7 +139,7 @@ mixin _$PokeApiStore on _PokeApiStoreBase, Store {
         name: '${_$_opacitytitleAppBarAtom.name}_set');
   }
 
-  final _$_progressAtom = Atom(name: '_PokeApiStoreBase._progress');
+  final _$_progressAtom = Atom(name: '_PokedexControllerBase._progress');
 
   @override
   double get _progress {
@@ -154,7 +156,7 @@ mixin _$PokeApiStore on _PokeApiStoreBase, Store {
     }, _$_progressAtom, name: '${_$_progressAtom.name}_set');
   }
 
-  final _$_multipliAtom = Atom(name: '_PokeApiStoreBase._multipli');
+  final _$_multipliAtom = Atom(name: '_PokedexControllerBase._multipli');
 
   @override
   double get _multipli {
@@ -171,7 +173,7 @@ mixin _$PokeApiStore on _PokeApiStoreBase, Store {
     }, _$_multipliAtom, name: '${_$_multipliAtom.name}_set');
   }
 
-  final _$_opacityAtom = Atom(name: '_PokeApiStoreBase._opacity');
+  final _$_opacityAtom = Atom(name: '_PokedexControllerBase._opacity');
 
   @override
   double get _opacity {
@@ -188,58 +190,58 @@ mixin _$PokeApiStore on _PokeApiStoreBase, Store {
     }, _$_opacityAtom, name: '${_$_opacityAtom.name}_set');
   }
 
-  final _$_PokeApiStoreBaseActionController =
-      ActionController(name: '_PokeApiStoreBase');
+  final _$_PokedexControllerBaseActionController =
+      ActionController(name: '_PokedexControllerBase');
 
   @override
-  dynamic fetchPokemonList() {
-    final _$actionInfo = _$_PokeApiStoreBaseActionController.startAction();
+  void fetchPokemonList() {
+    final _$actionInfo = _$_PokedexControllerBaseActionController.startAction();
     try {
       return super.fetchPokemonList();
     } finally {
-      _$_PokeApiStoreBaseActionController.endAction(_$actionInfo);
+      _$_PokedexControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   PokemonModel getPokemon({int index}) {
-    final _$actionInfo = _$_PokeApiStoreBaseActionController.startAction();
+    final _$actionInfo = _$_PokedexControllerBaseActionController.startAction();
     try {
       return super.getPokemon(index: index);
     } finally {
-      _$_PokeApiStoreBaseActionController.endAction(_$actionInfo);
+      _$_PokedexControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setCurrentPokemon({int index}) {
-    final _$actionInfo = _$_PokeApiStoreBaseActionController.startAction();
+    final _$actionInfo = _$_PokedexControllerBaseActionController.startAction();
     try {
       return super.setCurrentPokemon(index: index);
     } finally {
-      _$_PokeApiStoreBaseActionController.endAction(_$actionInfo);
+      _$_PokedexControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   Widget getImagePokemon(
       {String number, double width, double height, dynamic alignment}) {
-    final _$actionInfo = _$_PokeApiStoreBaseActionController.startAction();
+    final _$actionInfo = _$_PokedexControllerBaseActionController.startAction();
     try {
       return super.getImagePokemon(
           number: number, width: width, height: height, alignment: alignment);
     } finally {
-      _$_PokeApiStoreBaseActionController.endAction(_$actionInfo);
+      _$_PokedexControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setSlidingState(dynamic progress) {
-    final _$actionInfo = _$_PokeApiStoreBaseActionController.startAction();
+    final _$actionInfo = _$_PokedexControllerBaseActionController.startAction();
     try {
       return super.setSlidingState(progress);
     } finally {
-      _$_PokeApiStoreBaseActionController.endAction(_$actionInfo);
+      _$_PokedexControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 

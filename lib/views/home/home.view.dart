@@ -1,12 +1,12 @@
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:pokedex/models/pokemon.model.dart';
+import 'package:pokedex/views/pokemon-detail/pokemon.detail.view.dart';
 import 'package:pokedex/views/home/widgets/pokemon.item.widget.dart';
 import 'package:pokedex/views/home/widgets/app.bar.home.widget.dart';
-import 'package:pokedex/stores/poke.api.store.dart';
+import 'package:pokedex/controllers/pokedex.controller.dart';
+import 'package:pokedex/models/pokemon.model.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:pokedex/views/pokemon-detail/pokemon.detail.view.dart';
 
 
 class HomeView extends StatefulWidget {
@@ -16,14 +16,14 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   
-  PokeApiStore _pokeApiStore;
+  PokedexController _pokedexController;
   
   @override
   void initState() {
     super.initState();
-    _pokeApiStore = GetIt.instance<PokeApiStore>();
-    if (_pokeApiStore.pokedexModel == null) {
-      _pokeApiStore.fetchPokemonList();
+    _pokedexController = GetIt.instance<PokedexController>();
+    if (_pokedexController.pokedexModel == null) {
+      _pokedexController.fetchPokemonList();
     }
   }
 
@@ -62,16 +62,16 @@ class _HomeViewState extends State<HomeView> {
                     child: Observer(
                       name: 'ListHomeLayout',
                       builder: (BuildContext context) {
-                        return (_pokeApiStore.pokedexModel != null) ?
+                        return (_pokedexController.pokedexModel != null) ?
                         AnimationLimiter(
                           child: GridView.builder(
                             physics: BouncingScrollPhysics(),
                             padding: EdgeInsets.all(12),
                             addAutomaticKeepAlives: true,
                             gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-                            itemCount: _pokeApiStore.pokedexModel.pokemon.length,
+                            itemCount: _pokedexController.pokedexModel.pokemon.length,
                             itemBuilder: (context, index) {
-                              PokemonModel pokemon = _pokeApiStore.getPokemon(index: index);
+                              PokemonModel pokemon = _pokedexController.getPokemon(index: index);
                               return AnimationConfiguration.staggeredGrid(
                                 position: index,
                                 duration: Duration(milliseconds: 375),
@@ -86,7 +86,7 @@ class _HomeViewState extends State<HomeView> {
                                     ),
                                     onTap: () {
                                       /* current pokemon */
-                                      _pokeApiStore.setCurrentPokemon(index: index);
+                                      _pokedexController.setCurrentPokemon(index: index);
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(

@@ -1,12 +1,12 @@
+import 'package:pokedex/controllers/pokedex.controller.dart';
+import 'package:pokedex/utils/consts.api.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:pokedex/consts/consts.api.dart';
-import 'package:pokedex/stores/poke.api.store.dart';
 
 
 class PokemonItemWidget extends StatelessWidget {
 
-  PokeApiStore _pokeApiStore = GetIt.instance<PokeApiStore>();
+  PokedexController _pokedexController = GetIt.instance<PokedexController>();
   final String name;
   final int index;
   final String color;
@@ -58,7 +58,7 @@ class PokemonItemWidget extends StatelessWidget {
               ),
               Align(
                 alignment: Alignment.bottomRight,
-                child: _pokeApiStore.getImagePokemon(
+                child: _pokedexController.getImagePokemon(
                 number: num, width: 80, height: 80, alignment: Alignment.bottomRight),
               ),
             ],
